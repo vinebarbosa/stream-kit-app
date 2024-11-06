@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Network
 
 class ConnectDesktopViewController: UIViewController {
 
@@ -75,7 +76,7 @@ class ConnectDesktopViewController: UIViewController {
         setHierachy()
         setConstrains()
     }
-
+    
     func setupView() {
         view.backgroundColor = .backgroundSecondary
     }

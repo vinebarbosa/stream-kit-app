@@ -23,8 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let isConfigured = UserDefaults.standard.bool(forKey: "isConfigured")
 
         let rootViewController = UINavigationController(
-            rootViewController: isConfigured
-                ? PadsViewController() : ConnectDesktopViewController())
+            rootViewController: PadsViewController())
 
         window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()

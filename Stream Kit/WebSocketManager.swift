@@ -18,7 +18,7 @@ class WebSocketManager {
     }
     
     func connect() {
-        let url = URL(string: url)!
+        let url = URL(string: "ws://localhost:3333")!
         webSocketTask = URLSession.shared.webSocketTask(with: url)
         webSocketTask?.resume()
         receiveMessage()
@@ -49,10 +49,12 @@ class WebSocketManager {
                     fatalError()
                 }
             case .failure(_):
+                print("Algum erro ocorreu")
                 return
             }
             self?.receiveMessage()
         }
+        print("Pronto para receber mensagens")
     }
 
     private func handleReceivedData(_ text: String) {

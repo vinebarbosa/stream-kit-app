@@ -31,18 +31,12 @@ class PadsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupView()
         setHierarchy()
         setConstraints()
-
-        requestLocalNetworkAccess { [weak self] granted in
-            guard let self = self else { return }
-            if granted && !self.socketUrl.isEmpty {
-                self.setupWebSocket(url: self.socketUrl)
-            } else {
-                print("Acesso à rede local negado ou URL do WebSocket inválida.")
-            }
-        }
+        
+        verifyLocalNetworkPermission()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -107,28 +101,45 @@ class PadsViewController: UIViewController {
         
         view.layoutIfNeeded()
     }
-
+        
 
     @objc func appDidBecomeActive() {
         webSocketManager?.connect()
+        webSocketManager?.sendMessage("GET_DATA")
     }
 
     private func onPadTapped(id: Int) {
         webSocketManager?.sendMessage(String(id))
     }
-
-    private func requestLocalNetworkAccess(completion: @escaping (Bool) -> Void) {
+    
+    private func verifyLocalNetworkPermission() {
         let monitor = NWPathMonitor()
         monitor.pathUpdateHandler = { path in
             if path.status == .satisfied {
-                completion(true)
+                // Caso possuir a permissão de acesso a rede local
+                DispatchQueue.main.async {
+                    self.setupWebSocket(url: self.socketUrl)
+                }
             } else {
-                completion(false)
+                // Caso não possuir a permissão de acesso a rede local, pedir ao usuário
+                self.requestLocalNetworkPermission()
             }
-            monitor.cancel()
         }
-        let queue = DispatchQueue(label: "LocalNetworkMonitor")
+        let queue = DispatchQueue(label: "NetworkMonitor")
         monitor.start(queue: queue)
+    }
+
+    private func requestLocalNetworkPermission() {
+        // Essa é uma chamada de rede local que força o prompt de permissão para o usuário.
+        // Use uma conexão "dummy" para forçar a solicitação de permissão.
+        let dummyConnection = NWConnection(host: "localhost", port: 12345, using: .udp)
+        dummyConnection.start(queue: .main)
+        
+        // Quando o usuário conceder a permissão, configurar o WebSocket
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { // Delay para permitir resposta do prompt
+            dummyConnection.cancel()
+            self.setupWebSocket(url: self.socketUrl)
+        }
     }
 }
 
