@@ -6,7 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		221C70DA2CDC353D00B2CA59 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 221C70D92CDC352E00B2CA59 /* README.md */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		221C70D92CDC352E00B2CA59 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		2247D0CD2CC6FBA4009A720B /* Stream Kit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Stream Kit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -21,6 +26,11 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		221C70D52CDC34F400B2CA59 /* .github */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = .github;
+			sourceTree = "<group>";
+		};
 		2247D0CF2CC6FBA4009A720B /* Stream Kit */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -45,8 +55,10 @@
 		2247D0C42CC6FBA4009A720B = {
 			isa = PBXGroup;
 			children = (
+				221C70D52CDC34F400B2CA59 /* .github */,
 				2247D0CF2CC6FBA4009A720B /* Stream Kit */,
 				2247D0CE2CC6FBA4009A720B /* Products */,
+				221C70D92CDC352E00B2CA59 /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -74,6 +86,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				221C70D52CDC34F400B2CA59 /* .github */,
 				2247D0CF2CC6FBA4009A720B /* Stream Kit */,
 			);
 			name = "Stream Kit";
@@ -122,6 +135,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				221C70DA2CDC353D00B2CA59 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
